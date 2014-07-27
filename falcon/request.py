@@ -695,6 +695,10 @@ class Request(object):
         # PERF: Use if..in since it is a good all-around performer; we don't
         #       know how likely params are to be specified by clients.
         if name in params:
+
+            if isinstance(params[name], list):
+                return params[name]
+
             items = params[name].split(',')
 
             # PERF(kgriffs): Use if-else rather than a DRY approach
